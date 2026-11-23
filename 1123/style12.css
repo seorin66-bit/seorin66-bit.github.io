@@ -1,0 +1,443 @@
+@charset "UTF-8";
+
+/*======== RESET =======*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*======== HEADER =======*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background: rgb(255, 76, 121);
+    padding: 0 40px;
+}
+
+.nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+
+/*======== MAIN =======*/
+main {
+    width: 100%;
+    background: rgb(164, 240, 227);
+}
+
+main h2 {
+    text-align: center;
+    padding: 24px 0 10px;
+    font-size: 24px;
+}
+
+/* video box */
+.video-box,
+.video.box {
+    width: 100%;
+    max-width: 100%;
+}
+
+.video-box video,
+.video.box video {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+
+    /*원하는 높이에서 자름 height 값 설정 -> overflow: hidden*/
+    /*가로 길이의 세로 비율을 고정, 가로 크기에 따라 달라짐 -> aspect-ratio: 3/1;*/
+}
+
+
+/* profile box */
+.profile-box {
+    padding: 40px 20px;
+
+    #card img {
+        width: 80%;
+        margin-top: 50px;
+        transition: transform 0.4s ease;
+    }
+
+    #card img:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    #card {
+        width: 300px;
+        margin: 0 auto;
+        background: #fff;
+        text-align: center;
+        padding: 24px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    #card h1 {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 30px;
+        margin-bottom: 0px;
+        margin-top: 10px;
+    }
+
+    #card a {
+        display: block;
+        text-decoration: none;
+        width: 80%;
+        height: 40px;
+        background: #e7f03a92;
+        color: #ffffff;
+        font-weight: bold;
+        line-height: 40px;
+        margin: 0 auto;
+        border-radius: 5px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #card a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            #ff4b4b,
+            #ff8533,
+            #ffd13b,
+            #4cd964,
+            #2ac8d8,
+            #3b78ff,
+            #a155e8,
+            #ff4b4b
+        );
+        background-size: 200% 100%;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        animation: rainbow 3s linear infinite;
+    }
+
+    #card a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    #card a:hover::before {
+        opacity: 1;
+    }
+
+    #card p {
+        padding: 15px 0px;
+        font-size: 12px;
+    }
+}
+
+
+/* portfolio box (PC 기본: 가로 나열) */
+.portfolio-box {
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.portfolio-box .photo-list {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.portfolio-box .photo-list li {
+    width: 280px;
+    max-width: 100%;
+}
+
+.portfolio-box .photo-list img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-box .photo-list img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.438);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.modal:target {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    padding: 40px;
+    background: #9fd49d;
+    border-radius: 10px;
+    max-width: 90%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+.modal:target .modal-content:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    width: 27px;
+    height: 27px;
+    text-align: center;
+    line-height: 27px;
+    border-radius: 5px;
+    background: #fff;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #ff4c79;
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+
+/* slide box */
+.slide-box {
+    position: relative;
+    width: 60%;
+    max-width: 500px;
+    aspect-ratio: 1/1;
+    margin: 48px auto;
+}
+
+.slide-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.slide-box li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: fade 15s infinite;
+}
+
+.slide-box li:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.slide-box li:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.slide-box li:nth-child(3) {
+    animation-delay: 10s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/*======== FOOTER =======*/
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background: rgb(255, 199, 218);
+    padding: 0 40px;
+}
+
+footer ul {
+    display: flex;
+    gap: 30px;
+}
+
+
+/*========================================
+  반응형 미디어 쿼리 (Responsive Web)
+========================================*/
+
+/* 태블릿 (1024px 이하) */
+@media screen and (max-width: 1024px) {
+    header {
+        padding: 0 24px;
+    }
+
+    .portfolio-box {
+        padding: 30px 20px;
+    }
+
+    .portfolio-box .photo-list {
+        gap: 20px;
+    }
+
+    .portfolio-box .photo-list li {
+        width: 220px;
+    }
+
+    .slide-box {
+        width: 70%;
+        max-width: 420px;
+        margin: 36px auto;
+    }
+
+    .footer {
+        padding: 0 24px;
+    }
+}
+
+/* 모바일 (768px 이하) */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        height: auto;
+        padding: 16px;
+    }
+
+    .nav {
+        gap: 20px;
+    }
+
+    .profile-box {
+        padding: 30px 16px;
+    }
+
+    .profile-box #card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* .photo-list는 모바일 버전일 때 1개씩 출력 */
+    .portfolio-box {
+        padding: 24px 16px;
+    }
+
+    .portfolio-box .photo-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .portfolio-box .photo-list li {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .modal-content {
+        padding: 30px 16px;
+        width: 90%;
+    }
+
+    .slide-box {
+        width: 85%;
+        max-width: 320px;
+        margin: 28px auto;
+    }
+
+    .footer {
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        height: auto;
+        padding: 20px 16px;
+        text-align: center;
+    }
+
+    footer ul {
+        gap: 20px;
+    }
+}
